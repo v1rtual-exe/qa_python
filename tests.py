@@ -1,3 +1,4 @@
+import pytest
 from main import BooksCollector
 
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
@@ -22,10 +23,11 @@ class TestBooksCollector:
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-    def test_add_new_book_success(self):
+    @pytest.mark.parametrize('book_name', ['Война и мир', 'Марсианин', 'Гарри Поттер'])
+    def test_add_new_book_success(self, book_name):
         collector = BooksCollector()
-        collector.add_new_book('Война и мир')
-        assert 'Война и мир' in collector.get_books_genre()
+        collector.add_new_book(book_name)
+        assert book_name in collector.get_books_genre()
     def test_add_new_book_duplicate(self):
         collector = BooksCollector()
         collector.add_new_book('Война и мир')

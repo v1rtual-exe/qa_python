@@ -36,6 +36,14 @@ class TestBooksCollector:
         collector.set_book_genre('Война и мир', 'Фантастика')
         assert collector.get_book_genre('Война и мир') == 'Фантастика'
 
+    def test_get_books_genre(self, collector):
+        collector.add_new_book('Война и мир')
+        collector.add_new_book('Марсианин')
+        all_books = collector.get_books_genre()
+        assert len(all_books) == 2
+        assert 'Война и мир' in all_books
+        assert 'Марсианин' in all_books
+
     def test_get_book_genre(self, collector):
         collector.add_new_book('Война и мир')
         collector.set_book_genre('Война и мир', 'Фантастика')
@@ -64,6 +72,13 @@ class TestBooksCollector:
         collector.add_new_book('Война и мир')
         collector.add_book_in_favorites('Война и мир')
         assert 'Война и мир' in collector.get_list_of_favorites_books()
+
+    def test_get_list_of_favorites_books(self, collector):
+        collector.add_new_book('Война и мир')
+        collector.add_book_in_favorites('Война и мир')
+        favorites = collector.get_list_of_favorites_books()
+        assert len(favorites) == 1
+        assert 'Война и мир' in favorites
 
     def test_delete_book_from_favorites(self, collector):
         collector.add_new_book('Война и мир')
